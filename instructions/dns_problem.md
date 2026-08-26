@@ -1,6 +1,6 @@
 # pSSID DNS Troubleshooting Quick Guide
 
-
+```bash
 DNS fails?
     |
     v
@@ -22,6 +22,7 @@ Can namespace ping DNS server?
            +-- nameserver 172.30.0.5
                     |
                     +--> DNS should work
+```
 
 1. Check if the namespace has network connectivity by running `sudo ip netns exec pssid_wlan0 ping -c 3 172.30.0.5`.
 

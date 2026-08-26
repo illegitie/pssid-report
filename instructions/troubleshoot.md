@@ -23,10 +23,9 @@ Disable it and delete the socket. Then restart the pssid-daemon.
 ```bash
 sudo systemctl stop netplan-wpa-wlan0.service
 sudo rm -f /var/run/wpa_supplicant/wlan0
-``
-`
-This error can occur after rebooting the node. So it's prefererably to monitor nodes for sometime after reboot.
+```
 
+This error can occur after rebooting the node. So it's prefererably to monitor nodes for sometime after reboot.
 
 ## Finding error in test
 

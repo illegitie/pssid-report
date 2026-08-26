@@ -13,7 +13,6 @@
 You can use this github repo for configuring data pipeline or you can my version.  
 [git-hub page](https://github.com/UMNET-perfSONAR/pssid-data-pipeline)
 
-
 ### 4.1. create directory monitoring stack
 
 ```bash
@@ -21,6 +20,14 @@ mkdir montoring-stack
 ```
 
 ### 4.2. create docker-compose.yml
+
+Create token for grafana-renderer
+
+```bash
+openssl rand -hex 32
+```
+
+Insert it inside grafana-render AUTH_TOKEn and grafana GF_RENDERING_RENDERER_TOKEN
 
 ```yml
         services:
@@ -53,13 +60,24 @@ mkdir montoring-stack
         - ./logstash/pipeline:/usr/share/logstash/pipeline
         restart: unless-stopped
 
+    renderer:
+        image: grafana/grafana-image-renderer:latest
+        container_name: grafana-renderer
+        environment:
+                AUTH_TOKEN: TOKEN
+        restart: unless-stopped
     grafana:
         image: grafana/grafana:latest
         container_name: grafana
         depends_on:
         - opensearch
+        - renderer
         ports:
         - "3000:3000"
+        environment:
+                GF_RENDERING_SERVER_URL: http://renderer:8081/render
+                GF_RENDERING_CALLBACK_URL: http://grafana:3000/
+                GF_RENDERING_RENDERER_TOKEN: TOKEN
         volumes:
         - grafana-data:/var/lib/grafana
         restart: unless-stopped
