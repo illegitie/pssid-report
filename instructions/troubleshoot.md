@@ -23,7 +23,10 @@ Disable it and delete the socket. Then restart the pssid-daemon.
 ```bash
 sudo systemctl stop netplan-wpa-wlan0.service
 sudo rm -f /var/run/wpa_supplicant/wlan0
-```
+``
+`
+This error can occur after rebooting the node. So it's prefererably to monitor nodes for sometime after reboot.
+
 
 ## Finding error in test
 
@@ -42,3 +45,16 @@ sudo pscheduler result https://link-to-result
 
 Usually the tests are never started because of the overlapping schedules or for any other reason
 If you followed the instructions you shouldn't have problems with any test
+
+## Logstash troubleshooting
+
+To see the logstash logs
+
+```bash
+docker logs -f logstash --tail=100
+```
+
+Usually the problem is that metrics are truncated by filebeat or rsyslog. Check for JSON parsing errors and try to increase the size of messages in filebeat configuration in nodes.
+This particullary happens with throughput and latency tests. Latency test produces a big histogram with all metrics, throughput test just gives the big output in slightly weird format which is still json, but very big.
+
+---

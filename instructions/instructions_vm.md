@@ -10,9 +10,15 @@
 
 ### 4. Set up the data analytics stack
 
-Logstash->Opensearch->Grafana
+You can use this github repo for configuring data pipeline or you can my version.  
+[git-hub page](https://github.com/UMNET-perfSONAR/pssid-data-pipeline)
+
 
 ### 4.1. create directory monitoring stack
+
+```bash
+mkdir montoring-stack
+```
 
 ### 4.2. create docker-compose.yml
 
@@ -406,7 +412,7 @@ Change main.yml to
 
 Go to ansible-playbook-pssid-daemon/roles/ansible-role-pssid-VT-tools/templates
 
-change wpa_supplicant.conf.j2
+change wpa_supplicant.conf.j2 to
 
 ```j2
 ctrl_interface={{ wpa_supplicant_profiles.global_settings.ctrl_interface }}
@@ -472,5 +478,21 @@ ansible-playbook --ask-vault-pass --ask-pass --ask-become-pass --user usernamehe
 Put ```http://opensearch:9200``` as URL and choose access method as server
 
 Write pssid-* index name
+
+### 8. Grafana Monitoring
+
+For the most of the tests the Lucene query is
+
+```Lucene
+test_type:<name_of_the_test> AND device:<device_name>
+```
+
+For the throughput test it is necessary to also provide destination_ip
+
+```Lucene
+test_type:throughput AND throughput_destination:<dest_ip> AND device:<device_name>
+```
+
+For the most of the test, it is more useful to use time series panel so it is easier to see changes over time. But for packet loss and throughput retransmits the choice fell on statistic average.
 
 ---
