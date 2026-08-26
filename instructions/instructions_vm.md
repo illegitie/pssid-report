@@ -513,4 +513,9 @@ test_type:throughput AND throughput_destination:<dest_ip> AND device:<device_nam
 
 For the most of the test, it is more useful to use time series panel so it is easier to see changes over time. But for packet loss and throughput retransmits the choice fell on statistic average.
 
+You can import dashboard from dashboard-example.json
+
+1. Navigate to Dashboards → New → Import
+2. Drag and drop JSON file dashboard-example.json
+
 ---
