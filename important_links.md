@@ -18,3 +18,11 @@ This is the official link to the most relevant version of pSSID-gui. Delpoyment 
 [perfsonar tools](https://docs.perfsonar.net/pscheduler_ref_tests_tools.html#trace-tests)
 
 This is the official website where you can find all relevant info about pscheduler tests. It is really helpful for understanding of how the tests are executed and for troubleshooting.
+
+## 4. Data pipeline
+
+[github page](https://github.com/UMNET-perfSONAR/pssid-data-pipeline)
+
+This is the official documentation for installind Logstash, Opensearch and Grafana
+
+---
